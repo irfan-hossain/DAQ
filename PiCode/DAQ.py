@@ -23,5 +23,25 @@ for i in range (0,10):
             print("No Serial Port Found")
             sys.exit(0)
 
+# Input string to be set to Arduino Uno. Wait for same number of
+# bytes sent to come back from serial input buffer. Read bytes
+# from buffer and print to terminal.
+while True:
+    # Input string to send to Arduino Uno.
+    inputString = raw_input("Enter string to send to Arduino Uno: ")
 
+    # If user inputs "EXIT", exit from while loop.
+    if (inputString == "EXIT"):
+        break
 
+    # Send string to Arduino Uno over serial.
+    ser.write(inputString)
+
+    # Wait until the same number of bytes sent is read.
+    while (ser.inWaiting() < len(inputString)):
+        pass
+
+    #Read string in serial input buffer.
+    outputString = ser.read(len(inputString))
+
+    print("String recieved from Arduino Uno: ", outputString)
