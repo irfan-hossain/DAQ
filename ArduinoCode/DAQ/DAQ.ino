@@ -3,7 +3,7 @@
 void setup()
 {
   // Start serial communication.
-  Serial.begin(250000);
+  Serial.begin(9600);
 }
 
 

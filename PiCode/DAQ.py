@@ -10,6 +10,7 @@ for i in range (0,10):
     # Convert i to a string.
     portnum = str(i)
 
+
     # Append port number to end of portname_start.
     portname_full = ''.join([portname_start,portnum])
 
@@ -28,7 +29,7 @@ for i in range (0,10):
 # from buffer and print to terminal.
 while True:
     # Input string to send to Arduino Uno.
-    inputString = raw_input("Enter string to send to Arduino Uno: ")
+    inputString = bytes(input("Enter string to send to Arduino Uno: "), 'ascii')
 
     # If user inputs "EXIT", exit from while loop.
     if (inputString == "EXIT"):
@@ -37,11 +38,12 @@ while True:
     # Send string to Arduino Uno over serial.
     ser.write(inputString)
 
-    # Wait until the same number of bytes sent is read.
+    # Wait until the same number of bytes sent is recieved.
     while (ser.inWaiting() < len(inputString)):
         pass
 
     #Read string in serial input buffer.
     outputString = ser.read(len(inputString))
 
+    # Print string recieved from arduino uno.
     print("String recieved from Arduino Uno: ", outputString)
