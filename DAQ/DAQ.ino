@@ -9,26 +9,41 @@
 #include "utils/configReg.h"
 #include "utils/ISR.h"
 
+static uint8_t DATA_BUFF_0[500];
+
 void setup()
 {
+  /////////////////////////////////////////
+  /// Disable Interrupts.
+  cli();
+
   /////////////////////////////////////////
   /// Configure Registers for ADC
   configADMUX();
   configADCSRA();
+  configADCSRB();
 
   /////////////////////////////////////////
   /// Configure Registers for Timer1
+  configTCCR1A();
+  configTCCR1B();
+  configICR1();
 
   /////////////////////////////////////////
-  /// Enable Intterupts for ADC
+  /// Enable Interrupts for Timer1 and ADC.
+  enableInterrupts();
 
   /////////////////////////////////////////
-  /// Enable Interrupts for Time1
+  /// Enable Interrupts
+  sei();
 
+  /////////////////////////////////////////
+  /// Setup Serial Communication
+  Serial.begin(9600);
 }
 
 
 void loop()
 {
-
+  Serial.println(TEST_POINT);
 }
