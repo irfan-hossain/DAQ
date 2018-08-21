@@ -34,9 +34,9 @@ void configADCSRA()
   ADCSRA |= (1 << ADATE);
 
   // Set the ADC prescaler. PRESCALER = 2.
-  ADCSRA &= ~(1 << ADPS2);
-  ADCSRA &= ~(1 << ADPS1);
-  ADCSRA |=  (1 << ADPS0);
+  ADCSRA |= (1 << ADPS2);
+  ADCSRA |= (1 << ADPS1);
+  ADCSRA |= (1 << ADPS0);
 }
 
 /////////////////////////////////////////
@@ -74,11 +74,12 @@ void configTCCR1B()
 
   // Set CS12, CS11, and CS10 to 010 to set the Timer1
   // prescaler to 8. PRESCALER = 8;
-  TCCR1B |= (1 << CS11);
+  TCCR1B |= (1 << CS12);
+  TCCR1B |= (1 << CS10);
 }
 
 /////////////////////////////////////////
-/// 
+///
 void configICR1()
 {
   // With a PRESCALER of 8 and TOP value of 19, the interrupt
