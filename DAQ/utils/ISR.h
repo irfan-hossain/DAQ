@@ -6,8 +6,8 @@
 // Author: Irfan Hossain
 ///////////////////////////////////////////////////////////////////////////////
 
-static uint8_t TEST_POINT;
-
+extern volatile uint8_t data_byte;
+extern volatile bool flag;
 /////////////////////////////////////////
 ///
 void enableInterrupts()
@@ -36,8 +36,8 @@ ISR(TIMER1_COMPB_vect)
 ISR(ADC_vect)
 {
   // Read 8-bit conversion result from ADCH.
-  bool sampled = true;
-  unit8_t byte0 = ADCL;
+  uint8_t byte0 = ADCL;
   uint8_t byte1 = ADCH;
-  uint8_t data = (byte1 << 8);
+
+  flag = true;
 }

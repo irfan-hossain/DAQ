@@ -19,7 +19,6 @@ void configADMUX()
  // result. This creats an 8-bit result in
  // ADCH.
  ADMUX |= (1 << ADLAR);
-
 }
 
 /////////////////////////////////////////
@@ -33,8 +32,8 @@ void configADCSRA()
   // the ADC.
   ADCSRA |= (1 << ADATE);
 
-  // Set the ADC prescaler. PRESCALER = 2.
-  ADCSRA |= (1 << ADPS2);
+  // Set the ADC prescaler. PRESCALER = 8.
+  ADCSRA &= ~(1 << ADPS2);
   ADCSRA |= (1 << ADPS1);
   ADCSRA |= (1 << ADPS0);
 }
@@ -46,7 +45,7 @@ void configADCSRB()
   // ACME is not used and should be set to zero.
   ADCSRB &= ~(1 << ACME);
 
-  // Set Timer1 to CMB.
+  // Set Timer1 to Compare Match B
   ADCSRB |=  (1 << ADTS2);
   ADCSRB &= ~(1 << ADTS1);
   ADCSRB |=  (1 << ADTS0);
@@ -74,8 +73,9 @@ void configTCCR1B()
 
   // Set CS12, CS11, and CS10 to 010 to set the Timer1
   // prescaler to 8. PRESCALER = 8;
-  TCCR1B |= (1 << CS12);
-  TCCR1B |= (1 << CS10);
+  TCCR1B &= ~(1 << CS12);
+  TCCR1B |= (1 << CS11);
+  TCCR1B &= ~(1 << CS10);
 }
 
 /////////////////////////////////////////

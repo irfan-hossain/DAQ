@@ -9,7 +9,8 @@
 #include "utils/configReg.h"
 #include "utils/ISR.h"
 
-static uint8_t DATA_BUFF_0[500];
+volatile uint8_t data_byte;
+volatile bool flag;
 
 void setup()
 {
@@ -45,5 +46,9 @@ void setup()
 
 void loop()
 {
-  Serial.println(TEST_POINT);
+  if (flag == true)
+  {
+    Serial.println("ISR HIT");
+    flag = false;
+  }
 }
