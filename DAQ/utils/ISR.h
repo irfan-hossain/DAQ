@@ -39,5 +39,6 @@ ISR(ADC_vect)
   uint8_t byte0 = ADCL;
   uint8_t byte1 = ADCH;
 
+  data_byte = byte1;
   flag = true;
 }

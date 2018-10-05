@@ -40,7 +40,7 @@ void setup()
 
   /////////////////////////////////////////
   /// Setup Serial Communication
-  Serial.begin(9600);
+  Serial.begin(250000);
 }
 
 
@@ -48,7 +48,8 @@ void loop()
 {
   if (flag == true)
   {
-    Serial.println("ISR HIT");
+    //Serial.println("ISR HIT");
+    Serial.println(data_byte);
     flag = false;
   }
 }
