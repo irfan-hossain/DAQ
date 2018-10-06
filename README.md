@@ -11,6 +11,8 @@ An immensely helpful reference is the Atmel ATmega328/P datasheet, found [here](
    * ~~Adafruit T-Cobbler Plus~~
    * USB Serial Cable
 
+   ![alt text](images/Schematic.png)
+
 # Specifications
 The goal for this project is to:
 - Sample at 100 KHz.
