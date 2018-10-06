@@ -48,7 +48,6 @@ void loop()
 {
   if (flag == true)
   {
-    //Serial.println("ISR HIT");
     Serial.println(data_byte);
     flag = false;
   }

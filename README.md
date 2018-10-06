@@ -30,7 +30,7 @@ The code guide section is an explanation of some of the firmware choices for thi
 |REFS1|REFS0|ADLAR|--|MUX3|MUX2|MUX1|MUX0|
 |0|0|1|--|0|0|0|0|
 
-**[7:6]** Sets the reference voltage. This configuration sets the reference voltage to the internal reference voltage of the Arduino Uno.
+**[7:6]** Sets the reference voltage. This configuration sets the reference voltage to the AREF pin. For now the 5V output pin is connected to AREF.
 
 **[ 5 ]** Left shifts the 10 bit conversion result so the ADCH register contains an 8-bit result from the ADC. Example:
 * ADLAR = 0, ADCH = ---- --11, ADCL = 1011 0101

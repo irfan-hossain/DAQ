@@ -10,9 +10,9 @@
 ///
 void configADMUX()
 {
- // Set Register to all zeros since Vref
- // will be set to internal voltge and
- // analog pin A0 is used.
+ // Set Register to all zeros, this means A0
+ // will be used for input and the reference
+ // voltage comes from AREF.
  ADMUX = 0x00;
 
  // Set bit 5 (ADLAR) to left shift conversion
