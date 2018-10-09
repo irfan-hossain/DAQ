@@ -4,12 +4,13 @@ This project uses a Raspberry Pi and Arduino Uno to create a high speed data acq
 An immensely helpful reference is the Atmel ATmega328/P datasheet, found [here](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf).
 
 # Hardware
-   * ~~Raspberry Pi 2~~
    * Arduino Uno
-   * ~~OLED Display~~
-   * Light Sensor    
-   * ~~Adafruit T-Cobbler Plus~~
+   * Light Sensor
    * USB Serial Cable
+   * ~~OLED Display~~  
+   * ~~Raspberry Pi 2~~
+   * ~~Adafruit T-Cobbler Plus~~
+
 
    ![alt text](images/Schematic.png)
 
@@ -19,7 +20,7 @@ The goal for this project is to:
   - For a presclaer of 8, the top register should be 19.
 - Use Timer1 Compare Match B (TOP register is ICR1) to trigger a timer interrupt.
 - Use analog input A0.
-- Set the reference voltage to the Arduino Uno's reference voltage.
+- Set the reference voltage to 3.3 V.
 - Use an ADC prescale of 8 to achieve fast ADC conversion speeds (2 MHz).
 - Have the ADC result left shifted to achieve an 8-bit result stored in ADCH.
 
