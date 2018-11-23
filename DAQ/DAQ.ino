@@ -5,9 +5,14 @@
 //
 // Author: Irfan Hossain
 ///////////////////////////////////////////////////////////////////////////////
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 
 #include "utils/configReg.h"
 #include "utils/ISR.h"
+#include "utils/oledDisplay.h"
 
 volatile uint8_t data_byte;
 volatile bool flag;
@@ -39,6 +44,10 @@ void setup()
   sei();
 
   /////////////////////////////////////////
+  /// Setup OLED display.
+  setupOLED(1);
+
+  /////////////////////////////////////////
   /// Setup Serial Communication
   Serial.begin(250000);
 }
@@ -48,7 +57,7 @@ void loop()
 {
   if (flag == true)
   {
-    Serial.println(data_byte);
+    displayData(data_byte, 0, 0, 0);
     flag = false;
   }
 }
