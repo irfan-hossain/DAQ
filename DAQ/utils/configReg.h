@@ -5,9 +5,10 @@
 //
 // Author: Irfan Hossain
 ///////////////////////////////////////////////////////////////////////////////
+#define PRESCALER_INTERRUPT 19
 
 /////////////////////////////////////////
-///
+/// 
 void configADMUX()
 {
  // Set Register to all zeros, this means A0
@@ -84,5 +85,5 @@ void configICR1()
 {
   // With a PRESCALER of 8 and TOP value of 19, the interrupt
   // frequency is 100 KHz.
-  ICR1 = 19;
+  ICR1 = PRESCALER_INTERRUPT;
 }

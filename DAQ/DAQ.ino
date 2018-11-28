@@ -14,8 +14,8 @@
 #include "utils/ISR.h"
 #include "utils/oledDisplay.h"
 
-volatile uint8_t data_byte;
-volatile bool flag;
+volatile uint8_t data_byte = 0;
+volatile bool flag = false;
 
 void setup()
 {
@@ -46,6 +46,7 @@ void setup()
   /////////////////////////////////////////
   /// Setup OLED display.
   setupOLED(1);
+  resetOLED(0, 0);
 
   /////////////////////////////////////////
   /// Setup Serial Communication
@@ -55,9 +56,21 @@ void setup()
 
 void loop()
 {
+
+  /////////////////////////////////////////
+  ///
   if (flag == true)
   {
-    displayData(data_byte, 0, 0, 0);
+    displayData(data_byte, 0, 0);
     flag = false;
   }
+
+  display.drawPixel(64, 16,WHITE);
+  display.display();
+
+  /////////////////////////////////////////
+  ///
+  
+
+
 }
