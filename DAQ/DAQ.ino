@@ -14,6 +14,8 @@
 #include "utils/ISR.h"
 #include "utils/oledDisplay.h"
 
+#define BAUD_RATE 250000
+
 volatile uint8_t data_byte = 0;
 volatile bool flag = false;
 
@@ -50,27 +52,11 @@ void setup()
 
   /////////////////////////////////////////
   /// Setup Serial Communication
-  Serial.begin(250000);
+  Serial.begin(BAUD_RATE);
 }
 
 
 void loop()
 {
-
-  /////////////////////////////////////////
-  ///
-  if (flag == true)
-  {
-    displayData(data_byte, 0, 0);
-    flag = false;
-  }
-
-  display.drawPixel(64, 16,WHITE);
-  display.display();
-
-  /////////////////////////////////////////
-  ///
-  
-
-
+  plotData();
 }

@@ -8,6 +8,10 @@
 #define OLED_RESET 4
 Adafruit_SSD1306 display(OLED_RESET);
 
+#define OLED_WIDTH 127
+#define OLED_HEIGHT 31
+#define DATA_SCALE_FACTOR 8
+
 /////////////////////////////////////////
 /// Initialize all of OLED settings in
 /// one function.
@@ -35,4 +39,20 @@ void displayData(uint8_t data, int x, int y)
   resetOLED(x, y);
   display.print(data);
   display.display();
+}
+
+/////////////////////////////////////////
+/// Plot data on OLED display.
+void plotData()
+{
+  display.clearDisplay();
+
+  uint8_t y = 0;
+  for (int x = 0; x < OLED_WIDTH; x++)
+  {
+    y = OLED_HEIGHT - (data_byte/DATA_SCALE_FACTOR);
+    display.drawPixel(x, y, WHITE);
+
+    display.display();
+  }
 }
