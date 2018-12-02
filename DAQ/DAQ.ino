@@ -15,6 +15,10 @@
 #include "utils/oledDisplay.h"
 
 #define BAUD_RATE 250000
+#define SPLASH_X_CENTER 33
+#define SPLASH_Y_CENTER 13
+#define SPLASH_DELAY 5000
+#define TEXT_SIZE 1
 
 volatile uint8_t data_byte = 0;
 volatile bool flag = false;
@@ -47,7 +51,7 @@ void setup()
 
   /////////////////////////////////////////
   /// Setup OLED display.
-  setupOLED(1);
+  setupOLED(SPLASH_X_CENTER, SPLASH_Y_CENTER, TEXT_SIZE, SPLASH_DELAY);
   resetOLED(0, 0);
 
   /////////////////////////////////////////
