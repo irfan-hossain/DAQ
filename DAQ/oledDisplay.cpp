@@ -5,13 +5,21 @@
 //
 // Author: Irfan Hossain
 ///////////////////////////////////////////////////////////////////////////////
-#define OLED_RESET 4
-Adafruit_SSD1306 display(OLED_RESET);
+#include <SPI.h>
+#include <Wire.h>
+#include <Arduino.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include "include/oledDisplay.h"
 
+#define OLED_RESET 4
 #define OLED_WIDTH 127
 #define OLED_HEIGHT 31
 #define DATA_SCALE_FACTOR 8
 
+Adafruit_SSD1306 display(OLED_RESET);
+
+extern uint8_t data_byte;
 /////////////////////////////////////////
 /// Reset OLED to clear buffer and set the
 /// cursor for the print function.

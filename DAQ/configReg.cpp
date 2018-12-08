@@ -5,10 +5,14 @@
 //
 // Author: Irfan Hossain
 ///////////////////////////////////////////////////////////////////////////////
+#include <Arduino.h>
+#include "include/configReg.h"
+
+
 #define PRESCALER_INTERRUPT 19
 
 /////////////////////////////////////////
-/// 
+///
 void configADMUX()
 {
  // Set Register to all zeros, this means A0
@@ -86,4 +90,33 @@ void configICR1()
   // With a PRESCALER of 8 and TOP value of 19, the interrupt
   // frequency is 100 KHz.
   ICR1 = PRESCALER_INTERRUPT;
+}
+
+/////////////////////////////////////////
+///
+void configInterrupts()
+{
+
+  // Enable Timer1 CMB.
+  TIMSK1 |= (1 << OCIE1B);
+  TCNT1   = 0;
+
+  // ADC interrupt setup.
+  ADCSRA |= (1 << ADEN); // Enable ADC
+  ADCSRA |= (1 << ADIE); // Enable ADC
+  ADCSRA |= (1 << ADSC); // Start first conversion
+
+}
+
+/////////////////////////////////////////
+//
+void setupRegisters()
+{
+  configADMUX();
+  configADCSRA();
+  configADCSRB();
+  configTCCR1A();
+  configTCCR1B();
+  configICR1();
+  configInterrupts();
 }

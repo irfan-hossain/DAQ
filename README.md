@@ -7,7 +7,7 @@ An immensely helpful reference is the Atmel ATmega328/P datasheet, found [here](
    * Arduino Uno
    * Light Sensor
    * USB Serial Cable
-   * ~~OLED Display~~  
+   * OLED Display
    * ~~Raspberry Pi 2~~
    * ~~Adafruit T-Cobbler Plus~~
 

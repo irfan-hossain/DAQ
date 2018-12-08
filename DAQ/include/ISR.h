@@ -1,28 +1,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 //`File: ISR.h
-// Desc: File that contains all the ISR functions used in the code.
+// Desc: File that contains all the ISR functions used in the code. This .h
+// file does not have any includers other than the .ino file because the ISR
+// functions are only used once.
 //
 //
 // Author: Irfan Hossain
 ///////////////////////////////////////////////////////////////////////////////
+#ifndef ISR_H
+#define ISR_H
+
 extern volatile uint8_t data_byte;
 extern volatile bool flag;
-
-/////////////////////////////////////////
-///
-void enableInterrupts()
-{
-
-  // Enable Timer1 CMB.
-  TIMSK1 |= (1 << OCIE1B);
-  TCNT1   = 0;
-
-  // ADC interrupt setup.
-  ADCSRA |= (1 << ADEN); // Enable ADC
-  ADCSRA |= (1 << ADIE); // Enable ADC
-  ADCSRA |= (1 << ADSC); // Start first conversion
-
-}
 
 /////////////////////////////////////////
 ///
@@ -42,3 +31,5 @@ ISR(ADC_vect)
   data_byte = byte1;
   flag = true;
 }
+
+#endif ISR_H
