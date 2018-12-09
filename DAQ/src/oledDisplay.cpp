@@ -10,7 +10,7 @@
 #include <Arduino.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include "include/oledDisplay.h"
+#include "../include/oledDisplay.h"
 
 #define OLED_RESET 4
 #define OLED_WIDTH 127
@@ -20,6 +20,7 @@
 Adafruit_SSD1306 display(OLED_RESET);
 
 extern uint8_t data_byte;
+
 /////////////////////////////////////////
 /// Reset OLED to clear buffer and set the
 /// cursor for the print function.

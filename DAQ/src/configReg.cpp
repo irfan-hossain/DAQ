@@ -6,7 +6,7 @@
 // Author: Irfan Hossain
 ///////////////////////////////////////////////////////////////////////////////
 #include <Arduino.h>
-#include "include/configReg.h"
+#include "../include/configReg.h"
 
 
 #define PRESCALER_INTERRUPT 19

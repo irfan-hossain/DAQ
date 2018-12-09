@@ -25,7 +25,7 @@ void setupOLED(int x, int y, int textSize, int duration);
 void displayData(uint8_t data, int x, int y);
 
 /////////////////////////////////////////
-// 
+//
 void plotData();
 
 #endif OLEDDISPLAY_H

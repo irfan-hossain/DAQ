@@ -11,17 +11,19 @@
 #define ISR_H
 
 extern volatile uint8_t data_byte;
-extern volatile bool flag;
+extern volatile bool data_flag;
+extern volatile bool button1_flag;
 
 /////////////////////////////////////////
-///
+/// Interrupt just to trigger sampling
+/// does nothing.
 ISR(TIMER1_COMPB_vect)
 {
   // Do nothing.
 }
 
 /////////////////////////////////////////
-///
+/// Grab sample from ADCH
 ISR(ADC_vect)
 {
   // Read 8-bit conversion result from ADCH.
@@ -29,7 +31,14 @@ ISR(ADC_vect)
   uint8_t byte1 = ADCH;
 
   data_byte = byte1;
-  flag = true;
+  data_flag = true;
 }
 
+/////////////////////////////////////////
+/// Interrupt when pin 2 is on rising
+/// edge.
+ISR(INT0_vect)
+{
+  // code here.
+}
 #endif ISR_H
