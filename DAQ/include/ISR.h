@@ -12,7 +12,7 @@
 
 extern volatile uint8_t data_byte;
 extern volatile bool data_flag;
-extern volatile bool button1_flag;
+extern volatile bool pb_flag;
 
 /////////////////////////////////////////
 /// Interrupt just to trigger sampling
@@ -39,6 +39,6 @@ ISR(ADC_vect)
 /// edge.
 ISR(INT0_vect)
 {
-  // code here.
+  pb_flag = true;
 }
 #endif ISR_H

@@ -8,6 +8,9 @@
 #ifndef OLEDDISPLAY_H
 #define OLEDDISPLAY_H
 
+#define OLED_RESET 4
+#define DATA_SCALE_FACTOR 4
+
 /////////////////////////////////////////
 //
 void resetOLED(int x, int y);

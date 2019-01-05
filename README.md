@@ -7,7 +7,8 @@ An immensely helpful reference is the Atmel ATmega328/P datasheet, found [here](
    * Arduino Uno
    * Light Sensor
    * USB Serial Cable
-   * OLED Display
+   * Adafruit 128x64 OLED Display
+   * Momentary Pushbutton + 10K Ohm Resistor + 0.1 uF Capacitor
    * ~~Raspberry Pi 2~~
    * ~~Adafruit T-Cobbler Plus~~
 

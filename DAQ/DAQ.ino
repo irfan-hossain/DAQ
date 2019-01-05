@@ -16,14 +16,15 @@
 #include "include/pushbuttons.h"
 
 #define BAUD_RATE 250000
-#define SPLASH_X_CENTER 33
-#define SPLASH_Y_CENTER 13
+#define SPLASH_X 33
+#define SPLASH_Y 13
 #define SPLASH_DELAY 3000
 #define TEXT_SIZE 1
 #define BUTTON1 2
 
 volatile uint8_t data_byte = 0;
 volatile bool data_flag = false;
+volatile bool pb_flag = false;
 
 void setup()
 {
@@ -39,7 +40,7 @@ void setup()
 
   /////////////////////////////////////////
   /// Setup OLED display.
-  setupOLED(SPLASH_X_CENTER, SPLASH_Y_CENTER, TEXT_SIZE, SPLASH_DELAY);
+  setupOLED(SPLASH_X, SPLASH_Y, TEXT_SIZE, SPLASH_DELAY);
 
   /////////////////////////////////////////
   /// Setup Serial Communication

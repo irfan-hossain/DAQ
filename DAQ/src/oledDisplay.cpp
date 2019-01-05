@@ -12,11 +12,6 @@
 #include <Adafruit_SSD1306.h>
 #include "../include/oledDisplay.h"
 
-#define OLED_RESET 4
-#define OLED_WIDTH 127
-#define OLED_HEIGHT 31
-#define DATA_SCALE_FACTOR 8
-
 Adafruit_SSD1306 display(OLED_RESET);
 
 extern uint8_t data_byte;
@@ -38,7 +33,6 @@ void displaySplashScreen(int x, int y, int duration)
   display.print("DAQ SYSTEM");
   display.display();
   delay(duration);
-  display.clearDisplay();
 }
 
 /////////////////////////////////////////
@@ -46,7 +40,9 @@ void displaySplashScreen(int x, int y, int duration)
 /// one function.
 void setupOLED(int x, int y, int textSize, int duration)
 {
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+  // NOTE: #define SSD1306_128_64 is enabled in
+  // Adafruit_SSD1306.h
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3D);
   display.setTextSize(textSize);
   display.setTextColor(WHITE);
   display.setRotation(0); // Rotates screen by 270
@@ -69,9 +65,9 @@ void plotData()
   display.clearDisplay();
 
   uint8_t y = 0;
-  for (int x = 0; x < OLED_WIDTH; x++)
+  for (int x = 0; x < (SSD1306_LCDWIDTH - 1); x++)
   {
-    y = OLED_HEIGHT - (data_byte/DATA_SCALE_FACTOR);
+    y = (SSD1306_LCDHEIGHT - 1) - (data_byte/DATA_SCALE_FACTOR);
     display.drawPixel(x, y, WHITE);
 
     display.display();
