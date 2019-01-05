@@ -13,14 +13,12 @@
 #include "include/configReg.h"
 #include "include/ISR.h"
 #include "include/oledDisplay.h"
-#include "include/pushbuttons.h"
 
 #define BAUD_RATE 250000
 #define SPLASH_X 33
 #define SPLASH_Y 13
 #define SPLASH_DELAY 3000
 #define TEXT_SIZE 1
-#define BUTTON1 2
 
 volatile uint8_t data_byte = 0;
 volatile bool data_flag = false;
@@ -32,11 +30,7 @@ void setup()
   /// Setup registers for sampling.
   cli(); // Disable interrupts
   setupRegisters();
-  sei(); // Enable interrups
-
-  /////////////////////////////////////////
-  /// Setup pins.
-  pinMode(BUTTON1, INPUT);
+  sei(); // Enable interrupts
 
   /////////////////////////////////////////
   /// Setup OLED display.
@@ -50,5 +44,9 @@ void setup()
 
 void loop()
 {
-  plotData();
+  if (pb_flag == true)
+  {
+    plotData();
+  }
+  
 }
