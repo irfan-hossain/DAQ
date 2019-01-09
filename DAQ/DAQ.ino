@@ -17,7 +17,6 @@
 #define BAUD_RATE 250000
 #define SPLASH_X 33
 #define SPLASH_Y 13
-#define SPLASH_DELAY 3000
 #define TEXT_SIZE 1
 
 volatile uint8_t data_byte = 0;
@@ -34,13 +33,12 @@ void setup()
 
   /////////////////////////////////////////
   /// Setup OLED display.
-  setupOLED(SPLASH_X, SPLASH_Y, TEXT_SIZE, SPLASH_DELAY);
+  setupOLED(SPLASH_X, SPLASH_Y, SPLASH_DELAY);
 
   /////////////////////////////////////////
   /// Setup Serial Communication
   Serial.begin(BAUD_RATE);
 }
-
 
 void loop()
 {
@@ -48,5 +46,4 @@ void loop()
   {
     plotData();
   }
-  
 }

@@ -15,10 +15,10 @@
 Adafruit_SSD1306 display(OLED_RESET);
 
 extern uint8_t data_byte;
+extern volatile bool pb_flag;
 
 /////////////////////////////////////////
-/// Reset OLED to clear buffer and set the
-/// cursor for the print function.
+///
 void resetOLED(int x, int y)
 {
   display.setCursor(x, y);
@@ -26,40 +26,41 @@ void resetOLED(int x, int y)
 }
 
 /////////////////////////////////////////
-/// Show splash screen on OLED.
-void displaySplashScreen(int x, int y, int duration)
+///
+void setupOLED(int x, int y, int duration)
+{
+  // NOTE: #define SSD1306_128_64 is enabled in
+  // Adafruit_SSD1306.h
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3D);
+  display.setTextSize(TEXT_SIZE);
+  display.setTextColor(WHITE);
+  display.setRotation(0); // Rotates screen by 270
+
+  String text = "DAQ SYSTEM";
+  displayText(x, y, text, duration);
+}
+
+/////////////////////////////////////////
+///
+void displayText(int x, int y, String text, int duration)
 {
   resetOLED(x,y);
-  display.print("DAQ SYSTEM");
+  display.print(text);
   display.display();
   delay(duration);
 }
 
 /////////////////////////////////////////
-/// Initialize all of OLED settings in
-/// one function.
-void setupOLED(int x, int y, int textSize, int duration)
-{
-  // NOTE: #define SSD1306_128_64 is enabled in
-  // Adafruit_SSD1306.h
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3D);
-  display.setTextSize(textSize);
-  display.setTextColor(WHITE);
-  display.setRotation(0); // Rotates screen by 270
-  displaySplashScreen(x, y, duration);
-}
-
-/////////////////////////////////////////
-/// Show the sensor data, set the cursor.
-void displayData(uint8_t data, int x, int y)
+///
+void displayData( int x, int y)
 {
   resetOLED(x, y);
-  display.print(data);
+  display.print(data_byte);
   display.display();
 }
 
 /////////////////////////////////////////
-/// Plot data on OLED display.
+///
 void plotData()
 {
   display.clearDisplay();

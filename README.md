@@ -9,8 +9,9 @@ An immensely helpful reference is the Atmel ATmega328/P datasheet, found [here](
    * USB Serial Cable
    * Adafruit 128x64 OLED Display
    * Momentary Pushbutton + 10K Ohm Resistor + 0.1 uF Capacitor
-   * ~~Raspberry Pi 2~~
-   * ~~Adafruit T-Cobbler Plus~~
+   * Raspberry Pi 2
+   * Adafruit T-Cobbler Plus (Optional)
+   * Logic Level Converter
 
 
    ![alt text](images/Schematic.png)

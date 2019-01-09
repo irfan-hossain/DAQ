@@ -10,25 +10,83 @@
 
 #define OLED_RESET 4
 #define DATA_SCALE_FACTOR 4
+#define TEXT_SIZE 1
 
 /////////////////////////////////////////
+// module: resetOLED
 //
+// desc: Set's cursor for OLED and
+// clears display.
+//
+// inputs: x - x coordinate for cursor
+//         y - y cordinate for cursor
+//
+// outputs: none
+//
+// return: none
+/////////////////////////////////////////
 void resetOLED(int x, int y);
 
 /////////////////////////////////////////
+// module: setupOLED
 //
-void displaySplashScreen(int x, int y, int duration);
+// desc: Sets up OLED object for text
+// size, color, and rotation. Also
+// displays splash screen.
+//
+// inputs: x - x coordinate for cursor
+//         y - y cordinate for cursor
+//         duration - delay for splash
+//         screen.
+//
+// outputs: none
+//
+// return: none
+/////////////////////////////////////////
+void setupOLED(int x, int y, int duration);
 
 /////////////////////////////////////////
+// module: displayText
 //
-void setupOLED(int x, int y, int textSize, int duration);
+// desc: Displays a text string on OLED.
+//
+// inputs: x - x coordinate for cursor
+//         y - y cordinate for cursor
+//         duration - delay for splash
+//         screen.
+//
+// outputs:
+//
+// return:
+/////////////////////////////////////////
+void displayText(int x, int y, String text, int duration);
 
 /////////////////////////////////////////
+// module: displayData
 //
-void displayData(uint8_t data, int x, int y);
+// desc: Displays sensor data on OLED.
+//
+// inputs: x - x coordinate for cursor
+//         y - y cordinate for cursor
+//
+// outputs:
+//
+// return:
+/////////////////////////////////////////
+void displayData(int x, int y);
 
 /////////////////////////////////////////
+// module: plotData
 //
+// desc: Plots data in realtime from
+// OLED.
+//
+// inputs: none
+//
+// outputs: none
+//
+// return: none
+/////////////////////////////////////////
 void plotData();
 
 #endif OLEDDISPLAY_H

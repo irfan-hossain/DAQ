@@ -8,7 +8,6 @@
 #include <Arduino.h>
 #include "../include/configReg.h"
 
-
 /////////////////////////////////////////
 ///
 void configADMUX()

@@ -15,28 +15,38 @@ extern volatile bool data_flag;
 extern volatile bool pb_flag;
 
 /////////////////////////////////////////
-/// Interrupt just to trigger sampling
-/// does nothing.
+// module: TIMER1TIMER1_COMPB_vect
+//
+// desc: Interrupt triggered when Timer1
+// reaches a set value. This interrupt then
+// the ADC_vect interrupt for sampling.
+///////////////////////////////////////////
 ISR(TIMER1_COMPB_vect)
 {
   // Do nothing.
 }
 
 /////////////////////////////////////////
-/// Grab sample from ADCH
+// module:ADC_vect
+//
+// desc: Triggered when TIMER1_COMPB_vect
+// is triggered. This starts the ADC the
+// the ADC result is grabbed from here.
+/////////////////////////////////////////
 ISR(ADC_vect)
 {
   // Read 8-bit conversion result from ADCH.
-  uint8_t byte0 = ADCL;
-  uint8_t byte1 = ADCH;
-
-  data_byte = byte1;
+  data_byte = ADCH;
   data_flag = true;
 }
 
 /////////////////////////////////////////
-/// Interrupt when pin 2 is on rising
-/// edge.
+// module: INT0_vect
+//
+// desc: Triggered when Pin 2 detects a
+// rising edge. Used to register button
+// pressed. 
+/////////////////////////////////////////
 ISR(INT0_vect)
 {
   pb_flag = true;
