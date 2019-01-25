@@ -40,16 +40,4 @@ ISR(ADC_vect)
   data_flag = true;
 }
 
-/////////////////////////////////////////
-// module: INT0_vect
-//
-// desc: Triggered when Pin 2 detects a
-// rising edge. Used to register button
-// pressed. 
-/////////////////////////////////////////
-ISR(INT0_vect)
-{
-  pb_flag = true;
-}
-
 #endif ISR_H

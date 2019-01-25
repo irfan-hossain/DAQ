@@ -17,11 +17,11 @@
 #define BAUD_RATE 250000
 #define SPLASH_X 33
 #define SPLASH_Y 13
+#define SPLASH_DELAY 2000
 #define TEXT_SIZE 1
 
 volatile uint8_t data_byte = 0;
 volatile bool data_flag = false;
-volatile bool pb_flag = false;
 
 void setup()
 {
@@ -42,8 +42,9 @@ void setup()
 
 void loop()
 {
-  if (pb_flag == true)
+  if (data_flag == true)
   {
-    plotData();
+    Serial.println(data_byte);
+    data_flag = false;
   }
 }

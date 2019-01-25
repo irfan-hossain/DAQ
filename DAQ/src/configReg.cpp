@@ -91,16 +91,6 @@ void configICR1()
 
 /////////////////////////////////////////
 ///
-void configEICRA()
-{
-  // Set bits to enable a rising edge interrupt
-  // on Pin 2.
-  EICRA |= (1 << ISC11);
-  EICRA |= (1 << ISC10);
-}
-
-/////////////////////////////////////////
-///
 void configInterrupts()
 {
 
@@ -112,10 +102,6 @@ void configInterrupts()
   ADCSRA |= (1 << ADEN); // Enable ADC
   ADCSRA |= (1 << ADIE); // Enable ADC
   ADCSRA |= (1 << ADSC); // Start first conversion
-
-  // Enable Pin 2 INT 0
-  EIMSK |= (1 << INT0);
-
 }
 
 /////////////////////////////////////////
@@ -128,6 +114,5 @@ void setupRegisters()
   configTCCR1A();
   configTCCR1B();
   configICR1();
-  configEICRA();
   configInterrupts();
 }

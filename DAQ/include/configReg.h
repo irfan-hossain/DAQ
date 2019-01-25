@@ -97,20 +97,6 @@ void configTCCR1B();
 void configICR1();
 
 /////////////////////////////////////////
-// module: configEICRA
-//
-// desc: Configure what kind of edge to
-// trigger an interrupt for Pin 2.
-//
-// inputs: none
-//
-// outputs: none
-//
-// return: none
-/////////////////////////////////////////
-void configEICRA();
-
-/////////////////////////////////////////
 // module: configInterrupts
 //
 // desc: Enable Timer1, ADC, and Pin 2
