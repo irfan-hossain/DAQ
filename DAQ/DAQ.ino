@@ -12,9 +12,9 @@
 
 #include "include/configReg.h"
 #include "include/ISR.h"
-#include "include/oledDisplay.h"
+#include "include/buffer.h"
 
-#define BAUD_RATE 250000
+#define BAUD_RATE 115200
 #define SPLASH_X 33
 #define SPLASH_Y 13
 #define SPLASH_DELAY 2000
@@ -27,13 +27,7 @@ void setup()
 {
   /////////////////////////////////////////
   /// Setup registers for sampling.
-  cli(); // Disable interrupts
   setupRegisters();
-  sei(); // Enable interrupts
-
-  /////////////////////////////////////////
-  /// Setup OLED display.
-  setupOLED(SPLASH_X, SPLASH_Y, SPLASH_DELAY);
 
   /////////////////////////////////////////
   /// Setup Serial Communication
@@ -42,9 +36,5 @@ void setup()
 
 void loop()
 {
-  if (data_flag == true)
-  {
-    Serial.println(data_byte);
-    data_flag = false;
-  }
+
 }

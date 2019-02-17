@@ -5,24 +5,22 @@ An immensely helpful reference is the Atmel ATmega328/P datasheet, found [here](
 
 # Hardware
    * Arduino Uno
-   * Light Sensor
-   * USB Serial Cable
-   * Raspberry Pi 2
+   * Light Sensor (or any sensor with analog output)
+   * USB Serial Cable (for Uno)
+   * Raspberry Pi 2 (or above)
    * Adafruit T-Cobbler Plus (Optional)
    * Logic Level Converter
-
-
-   ![alt text](images/Schematic.png)
+   * OLED 128x64 I2C display.
 
 # Specifications
 The goal for this project is to:
-- Sample at 100 KHz.
-  - For a presclaer of 8, the top register should be 19.
+- Sample at 8 KHz KHz.
+  - For a presclaer of 2, the top register should be 499.
 - Use Timer1 Compare Match B (TOP register is ICR1) to trigger a timer interrupt.
 - Use analog input A0.
 - Set the reference voltage to 3.3 V.
 - Use an ADC prescale of 8 to achieve fast ADC conversion speeds (2 MHz).
-- Have the ADC result left shifted to achieve an 8-bit result stored in ADCH.
+- Have the ADC result left shifted to achieve an 8-bit result stored in ADCH, rather than combine the default 10-bit result.
 
 # Code Guide
 The code guide section is an explanation of some of the firmware choices for this project, and hopefully a reference for others looking to create their own DAQ, or expand and improve upon this design.
@@ -99,4 +97,4 @@ The code guide section is an explanation of some of the firmware choices for thi
 
 ### ICR1
 
-ICR1 = 19
+ICR1 = 499

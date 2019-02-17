@@ -108,6 +108,9 @@ void configInterrupts()
 //
 void setupRegisters()
 {
+  // disable interrupts
+  cli();
+
   configADMUX();
   configADCSRA();
   configADCSRB();
@@ -115,4 +118,7 @@ void setupRegisters()
   configTCCR1B();
   configICR1();
   configInterrupts();
+
+  // enable interrupts
+  sei();
 }
