@@ -11,8 +11,8 @@
 
 #include "../include/buffer.h"
 
-
-
+static Adafruit_FRAM_I2C buff0     = Adafruit_FRAM_I2C();
+static Adafruit_FRAM_I2C buff1     = Adafruit_FRAM_I2C();
 
 /////////////////////////////////////////
 ///
@@ -62,4 +62,70 @@ void testFRAM()
 
     Serial.print(value, HEX); Serial.print(" ");
   }
+}
+
+/////////////////////////////////////////
+///
+void setupBuffers()
+{
+  bool buff0_result = buff0.begin(0x50);
+  bool buff1_result = buff0.begin(0x51);
+
+  if ((buff0_result && buff1_result) != true)
+  {
+    Serial.println("FRAM ERROR: CHECK CONNECTIONS");
+  }
+}
+
+/////////////////////////////////////////
+///
+void writeBufferI2C(uint8_t  data)
+{
+  // Which buffer to write to.
+  static uint8_t buffNum = 0;
+  // Index for FRAM address.
+  static uint16_t i = 1;
+
+  // Write data buffer.
+  if (buffNum == 0)
+  {
+    buff0.write8(i, data);
+    i++;
+  }
+  else if (buffNum = 1)
+  {
+    buff1.write8(i, data);
+    i++;
+  }
+  else
+  {
+    Serial.println("BUFFER ERROR: BUFF NUM TOO HIGH");
+  }
+
+  // If the buffer is full, toggle buffer to
+  // write to
+  if (i == 32768)
+  {
+    i = 0;
+    buffNum = !buffNum;
+  }
+}
+
+/////////////////////////////////////////
+///
+void sendBufferSPI(uint8_t buffNum, uint16_t addr)
+{
+  if (buffNum == 0)
+  {
+    Serial.println(buff0.read8(addr));
+  }
+  else if (buffNum == 1)
+  {
+    Serial.println(buff1.read8(addr));
+  }
+  else 
+  {
+    Serial.println("BUFFER ERROR: BUFF NUM TOO HIGH");
+  }
+
 }

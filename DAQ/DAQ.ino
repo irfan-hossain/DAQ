@@ -32,9 +32,15 @@ void setup()
   /////////////////////////////////////////
   /// Setup Serial Communication
   Serial.begin(BAUD_RATE);
+
+  // Setup FRAM Chips
+  setupBuffers();
 }
 
 void loop()
 {
-
+  if(data_byte == true)
+  {
+    writeBufferI2C(data_byte);
+  }
 }
