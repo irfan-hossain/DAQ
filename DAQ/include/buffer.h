@@ -42,10 +42,38 @@ void testFRAM();
 /////////////////////////////////////////
 void setupBuffers();
 
-void writeBufferI2C(uint8_t data);
+/////////////////////////////////////////
+// module: setupBuffers
+//
+// desc: Begins FRAM communications and
+// checls that connection is successful
+//
+// inputs: none
+//
+// outputs: result - 1 if both FRAM
+//                   chips connected.
+//                   0 if one or both
+//                   FRAM chips fail.
+//
+// return: none
+/////////////////////////////////////////
+void transmitBuffer(uint8_t buffNum, uint16_t addr);
 
-void sendBufferSPI(uint8_t buffNum);
-
-bool checkBufferFull();
+/////////////////////////////////////////
+// module: setupBuffers
+//
+// desc: Begins FRAM communications and
+// checls that connection is successful
+//
+// inputs: none
+//
+// outputs: result - 1 if both FRAM
+//                   chips connected.
+//                   0 if one or both
+//                   FRAM chips fail.
+//
+// return: none
+/////////////////////////////////////////
+void writeBuffer(uint8_t buffNum, uint16_t addr, uint8_t data);
 
 #endif BUFFER_H

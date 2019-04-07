@@ -69,9 +69,14 @@ void testFRAM()
 void setupBuffers()
 {
   bool buff0_result = buff0.begin(0x50);
-  bool buff1_result = buff0.begin(0x51);
+  //bool buff1_result = buff0.begin(0x51);
 
-  if ((buff0_result && buff1_result) != true)
+  // if ((buff0_result && buff1_result) != true)
+  // {
+  //   Serial.println("FRAM ERROR: CHECK CONNECTIONS");
+  // }
+
+  if ((buff0_result) != true)
   {
     Serial.println("FRAM ERROR: CHECK CONNECTIONS");
   }
@@ -79,53 +84,48 @@ void setupBuffers()
 
 /////////////////////////////////////////
 ///
-void writeBufferI2C(uint8_t  data)
+void transmitBuffer(uint8_t buffNum, uint16_t addr)
 {
-  // Which buffer to write to.
-  static uint8_t buffNum = 0;
-  // Index for FRAM address.
-  static uint16_t i = 1;
+  uint8_t data = 0;
 
-  // Write data buffer.
   if (buffNum == 0)
   {
-    buff0.write8(i, data);
-    i++;
+    data = buff0.read8(addr);
+    Serial.print(buffNum);
+    Serial.print("\t");
+    Serial.println(data);
+    // SPI send data
   }
-  else if (buffNum = 1)
-  {
-    buff1.write8(i, data);
-    i++;
-  }
-  else
-  {
-    Serial.println("BUFFER ERROR: BUFF NUM TOO HIGH");
-  }
-
-  // If the buffer is full, toggle buffer to
-  // write to
-  if (i == 32768)
-  {
-    i = 0;
-    buffNum = !buffNum;
-  }
+  // else if (buffNum == 1)
+  // {
+  //   data = buff1.read8(addr);
+  //   Serial.print(buffNum);
+  //   Serial.print("\t");
+  //   Serial.println(data);
+  //   // SPI send data
+  // }
+  // else
+  // {
+  //   // How many owls does it take to code an app?
+  //   // i dont know either
+  // }
 }
 
 /////////////////////////////////////////
 ///
-void sendBufferSPI(uint8_t buffNum, uint16_t addr)
+void writeBuffer(uint8_t buffNum, uint16_t addr, uint8_t data)
 {
   if (buffNum == 0)
   {
-    Serial.println(buff0.read8(addr));
+    buff0.write8(addr, data);
   }
   else if (buffNum == 1)
   {
-    Serial.println(buff1.read8(addr));
+    buff1.write8(addr, data);
   }
-  else 
+  else
   {
-    Serial.println("BUFFER ERROR: BUFF NUM TOO HIGH");
+    // My coding skills are the same as that
+    // of a sack of potatoes
   }
-
 }

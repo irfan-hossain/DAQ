@@ -39,8 +39,23 @@ void setup()
 
 void loop()
 {
-  if(data_byte == true)
+  if (data_flag == true)
   {
-    writeBufferI2C(data_byte);
+    static uint8_t buffNum = 0;
+    static uint16_t i = 0;
+
+    transmitBuffer(buffNum, i);
+    writeBuffer(buffNum, i, data_byte);
+
+    if (i == FRAM_SIZE)
+    {
+      i = 0;
+      bufNum = 1;
+    }
+    
+    data_flag = false;
+    i++;
   }
+
+
 }
