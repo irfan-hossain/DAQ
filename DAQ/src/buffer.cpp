@@ -8,15 +8,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 #include <Wire.h>
 #include "Adafruit_FRAM_I2C.h"
-
 #include "../include/buffer.h"
 
 static Adafruit_FRAM_I2C buff0     = Adafruit_FRAM_I2C();
 static Adafruit_FRAM_I2C buff1     = Adafruit_FRAM_I2C();
 
+static const uint8_t  BUFF0_ADDR = 0x50;
+static const uint8_t  BUFF1_ADDR = 0x51;
+
 /////////////////////////////////////////
 ///
-void testFRAM()
+void testFRAM(uint16_t baud_rate, uint16_t fram_size)
 {
   //Example code for the Adafruit I2C FRAM breakout */
   // Connect SCL    to analog 5
@@ -25,11 +27,10 @@ void testFRAM()
   // Connect GROUND to common ground
 
   Adafruit_FRAM_I2C fram     = Adafruit_FRAM_I2C();
-  uint16_t          framAddr = 0;
 
-  Serial.begin(9600);
+  Serial.begin(baud_rate);
 
-  if (fram.begin(0x50))
+  if (fram.begin(BUFF1_ADDR))
   {  // you can stick the new i2c addr in here, e.g. begin(0x51);
     Serial.println("Found I2C FRAM");
   } else
@@ -46,15 +47,17 @@ void testFRAM()
 
   // dump the entire 32K of memory!
   uint8_t value;
-  for (uint16_t a = 0; a < 32768; a++)
+  for (uint16_t i = 0; i < fram_size; i++)
   {
 
-    value = fram.read8(a);
-    if ((a % 32) == 0)
+    value = fram.read8(i);
+    if ((i % 32) == 0)
     {
-      Serial.print("\n 0x"); Serial.print(a, HEX); Serial.print(": ");
+      Serial.print("\n 0x"); Serial.print(i, HEX); Serial.print(": ");
     }
+
     Serial.print("0x");
+
     if (value < 0x1)
     {
       Serial.print('0');
@@ -68,18 +71,23 @@ void testFRAM()
 ///
 void setupBuffers()
 {
-  bool buff0_result = buff0.begin(0x50);
-  //bool buff1_result = buff0.begin(0x51);
+  bool result = 0;
 
-  // if ((buff0_result && buff1_result) != true)
-  // {
-  //   Serial.println("FRAM ERROR: CHECK CONNECTIONS");
-  // }
-
-  if ((buff0_result) != true)
+  result = buff0.begin(BUFF0_ADDR);
+  if (result == true)
   {
-    Serial.println("FRAM ERROR: CHECK CONNECTIONS");
+    Serial.println("BUFF 0 FRAM SUCCESS");
   }
+  else
+  {
+    Serial.println("BUFF 0 FRAM ERROR: CHECK CONNECTIONS");
+  }
+
+  // result = buff1.begin(BUFF1_ADDR);
+  // if (result != true)
+  // {
+  //   Serial.println("BUFF 1 FRAM ERROR: CHECK CONNECTIONS");
+  // }
 }
 
 /////////////////////////////////////////
@@ -119,13 +127,13 @@ void writeBuffer(uint8_t buffNum, uint16_t addr, uint8_t data)
   {
     buff0.write8(addr, data);
   }
-  else if (buffNum == 1)
-  {
-    buff1.write8(addr, data);
-  }
-  else
-  {
-    // My coding skills are the same as that
-    // of a sack of potatoes
-  }
+  // else if (buffNum == 1)
+  // {
+  //   buff1.write8(addr, data);
+  // }
+  // else
+  // {
+  //   // My coding skills are the same as that
+  //   // of a sack of potatoes
+  // }
 }

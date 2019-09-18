@@ -9,8 +9,6 @@
 #ifndef CONFIGREG_H
 #define CONFIGREG_H
 
-#define PRESCALER_INTERRUPT 19
-
 /////////////////////////////////////////
 // module: configADMUX
 //

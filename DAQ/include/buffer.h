@@ -9,7 +9,6 @@
 #ifndef BUFFER_H
 #define BUFFER_H
 
-#define FRAM_SIZE 32768
 /////////////////////////////////////////
 // module: testFRAM
 //

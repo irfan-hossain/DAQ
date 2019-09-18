@@ -8,6 +8,8 @@
 #include <Arduino.h>
 #include "../include/configReg.h"
 
+static const uint8_t PRESCALER_INTERRUPT = 19;
+ 
 /////////////////////////////////////////
 ///
 void configADMUX()
@@ -111,6 +113,7 @@ void setupRegisters()
   // disable interrupts
   cli();
 
+  // Configure registers
   configADMUX();
   configADCSRA();
   configADCSRB();
