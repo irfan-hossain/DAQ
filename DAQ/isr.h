@@ -10,10 +10,6 @@
 #ifndef ISR_H
 #define ISR_H
 
-extern volatile uint8_t data_byte;
-extern volatile bool data_flag;
-extern volatile bool pb_flag;
-
 /////////////////////////////////////////
 // module: TIMER1TIMER1_COMPB_vect
 //
@@ -36,8 +32,8 @@ ISR(TIMER1_COMPB_vect)
 ISR(ADC_vect)
 {
   // Read 8-bit conversion result from ADCH.
-  data_byte = ADCH;
-  data_flag = true;
+
+  // Write data to FRAM
 }
 
-#endif ISR_H
+#endif
