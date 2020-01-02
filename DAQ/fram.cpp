@@ -17,8 +17,6 @@ static const uint16_t BUFFER1_START  = 0x4000;
 static const uint16_t BUFFER0_END    = 0x4000;
 static const uint16_t BUFFER0_START  = 0x0000;
 
-static const uint8_t slaveSelectPin = 10;
-
 static uint16_t rxAddress;
 static uint16_t txAddress;
 
@@ -57,7 +55,7 @@ void rxBuffer(uint8_t data)
 void txBuffer()
 {
   uint8_t data = fram.read8(txAddress);
-  // Send data over SPI
+  writeSPI(data);
   txAddress = txAddress + sizeof(uint8_t);
 }
 
@@ -91,6 +89,7 @@ void refreshBuffers()
 /////////////////////////////////////////
 void beginFRAM()
 {
+  refreshBuffers();
   fram.begin();
 }
 
@@ -137,7 +136,7 @@ void bufferSwitching()
 /////////////////////////////////////////
 void beginSPI()
 {
-  pinMode(slaveSelectPin, OUTPUT);
+  pinMode(MISO, OUTPUT);
   SPI.begin();
 }
 
@@ -154,8 +153,7 @@ void beginSPI()
 /////////////////////////////////////////
 void writeSPI(uint8_t data)
 {
-  digitalWrite(slaveSelectPin, LOW);
-  SPI.transfer(txAddress);
-  SPI.transfer(data);
-  digitalWrite(slaveSelectPin, HIGH);
+  // Writing to SPDR (data register) initiates
+  // data transfer from arduino to pi.
+  SPDR = data;
 }

@@ -225,7 +225,6 @@ void setupRegisters()
   configTCCR1A();
   configTCCR1B();
   configICR1();
-  enableInterrupts();
 
   // enable interrupts
   sei();
