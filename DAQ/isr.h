@@ -10,6 +10,8 @@
 #ifndef ISR_H
 #define ISR_H
 
+#include "fram.h"
+
 /////////////////////////////////////////
 // module: TIMER1TIMER1_COMPB_vect
 //
@@ -32,8 +34,10 @@ ISR(TIMER1_COMPB_vect)
 ISR(ADC_vect)
 {
   // Read 8-bit conversion result from ADCH.
+  uint8_t data = ADCH;
 
   // Write data to FRAM
+  rxBuffer(data);
 }
 
 #endif

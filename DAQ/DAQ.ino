@@ -8,9 +8,7 @@
 #include "Wire.h"
 #include "isr.h"
 #include "register.h"
-
-static const uint16_t BAUD_RATE  = 9600;
-static const uint16_t FRAM_SIZE  = 32768;
+#include "fram.h"
 
 void setup()
 {
@@ -20,9 +18,12 @@ void setup()
 
   /////////////////////////////////////////
   /// Setup SPI Communication
+  beginSPI();
 
   /////////////////////////////////////////
   /// Setup FRAM chips.
+  refreshBuffers();
+  beginFRAM();
 
   /////////////////////////////////////////
   /// Setup LEDs.

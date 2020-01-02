@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //`File: fram.h
-// Desc:
+// Desc: Function that relate to FRAM sending and recieving.
 //
 //
 //
@@ -10,6 +10,12 @@
 #ifndef FRAM_H
 #define FRAM_H
 
+void rxBuffer(uint8_t data);
 void txBuffer();
-void rxBuffer();
+void refreshBuffers();
+void beginFRAM();
+void bufferSwitching();
+void beginSPI();
+void writeSPI(uint8_t data);
+
 #endif
