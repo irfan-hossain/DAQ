@@ -10,19 +10,18 @@
 
 static const uint16_t PRESCALER_INTERRUPT = 1249;
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: configADMUX
 //
-// desc: Set registers relating to ADC
-// input pin and whether to left shift
-// conversion.
+// desc: Set registers relating to ADC input pin and 
+// whether to left shift conversion.
 //
 // inputs: none
 //
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void configADMUX()
 {
  // Set Register to all zeros, this means A0
@@ -36,19 +35,18 @@ void configADMUX()
  ADMUX |= (1 << ADLAR);
 }
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: configADCSRA
 //
-// desc: Configure register to turn
-// ADC on, the autotrigger, and set
-// the ADC clock prescaler.
+// desc: Configure register to turn ADC on, the autotrigger, 
+// and set the ADC clock prescaler.
 //
 // inputs: none
 //
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void configADCSRA()
 {
   // Turn ADC on.
@@ -64,7 +62,7 @@ void configADCSRA()
   ADCSRA |= (1 << ADPS0);
 }
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: configADCSRB
 //
 // desc: Configure Timer1 mode.
@@ -74,7 +72,7 @@ void configADCSRA()
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void configADCSRB()
 {
   // ACME is not used and should be set to zero.
@@ -86,7 +84,7 @@ void configADCSRB()
   ADCSRB |=  (1 << ADTS0);
 }
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: configTCCR1A
 //
 // desc: Has bits to set register of
@@ -97,7 +95,7 @@ void configADCSRB()
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void configTCCR1A()
 {
   // Sets normal operation and starts part 1 to select
@@ -105,7 +103,7 @@ void configTCCR1A()
   TCCR1A = 0x00;
 }
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: configTCCR1B
 //
 // desc: Has bits to set register of
@@ -117,7 +115,7 @@ void configTCCR1A()
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void configTCCR1B()
 {
   // Set register equal to 0x00 at the beginning and then
@@ -134,7 +132,7 @@ void configTCCR1B()
   TCCR1B &= ~(1 << CS10);
 }
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: configICR1
 //
 // desc: Set TOP value.
@@ -144,7 +142,7 @@ void configTCCR1B()
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void configICR1()
 {
   // With a PRESCALER of 8 and TOP value of 1249, the interrupt
@@ -152,7 +150,7 @@ void configICR1()
   ICR1 = PRESCALER_INTERRUPT;
 }
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: enableInterrupts
 //
 // desc: Enable Timer1, ADC, and Pin 2
@@ -163,7 +161,7 @@ void configICR1()
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void enableInterrupts()
 {
 
@@ -177,18 +175,17 @@ void enableInterrupts()
   ADCSRA |= (1 << ADSC); // Start first conversion
 }
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: disableInterrupts
 //
-// desc: Disable Timer1, ADC, and Pin 2
-// interrupts.
+// desc: Disable Timer1, ADC, and Pin 2 interrupts.
 //
 // inputs: none
 //
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void disableInterrupts()
 {
 
@@ -201,7 +198,7 @@ void disableInterrupts()
   ADCSRA |= ~(1 << ADSC); // Disable first conversion
 }
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: setupRegisters
 //
 // desc: Function to wrap all the setup functions
@@ -212,7 +209,7 @@ void disableInterrupts()
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void setupRegisters()
 {
   // disable interrupts

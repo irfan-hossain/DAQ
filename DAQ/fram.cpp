@@ -9,11 +9,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 #include "Wire.h"
 #include "fram.h"
+#include "oledDisplay.h"
 #include "Adafruit_FRAM_I2C.h"
-#include <SPI.h>
 
+// Takes second half of FRAM chip
 static const uint16_t BUFFER1_END    = 0x8000;
 static const uint16_t BUFFER1_START  = 0x4000;
+
+// Takes first half of FRAM chip
 static const uint16_t BUFFER0_END    = 0x4000;
 static const uint16_t BUFFER0_START  = 0x0000;
 
@@ -22,26 +25,25 @@ static uint16_t txAddress;
 
 Adafruit_FRAM_I2C fram = Adafruit_FRAM_I2C();
 
-////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: rxBuffer
 //
-// desc: Wrire data to specified buffer
-//       in FRAM.
+// desc: Write data to specified buffer in FRAM.
 //
 // inputs: data - data to write
 //
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void rxBuffer(uint8_t data)
 {
+  bufferSwitching();
   fram.write8(rxAddress, data);
   rxAddress = rxAddress + sizeof(uint8_t);
-  bufferSwitching();
 }
 
-////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: txBuffer
 //
 // desc: Send data from FRAM to Pi.
@@ -51,15 +53,15 @@ void rxBuffer(uint8_t data)
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void txBuffer()
 {
   uint8_t data = fram.read8(txAddress);
-  writeSPI(data);
+  displayData(0, 0, data);
   txAddress = txAddress + sizeof(uint8_t);
 }
 
-////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: refreshBuffers
 //
 // desc: initialize FRAM begin and variables
@@ -69,14 +71,14 @@ void txBuffer()
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void refreshBuffers()
 {
   rxAddress = BUFFER0_START;
   txAddress = BUFFER1_START;
 }
 
-////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: beginFRAM
 //
 // desc: Wrapper function for begin()
@@ -86,14 +88,14 @@ void refreshBuffers()
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void beginFRAM()
 {
   refreshBuffers();
   fram.begin();
 }
 
-////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: bufferSwitching
 //
 // desc: Switch between send and recieve
@@ -104,7 +106,7 @@ void beginFRAM()
 // outputs: none
 //
 // return: none
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 void bufferSwitching()
 {
   if (rxAddress == BUFFER0_END)
@@ -121,39 +123,4 @@ void bufferSwitching()
   {
     // Do nothing
   }
-}
-
-////////////////////////////////////////
-// module: beginSPI
-//
-// desc: Wrapper function for SPI init
-//
-// inputs: none
-//
-// outputs: none
-//
-// return: none
-/////////////////////////////////////////
-void beginSPI()
-{
-  pinMode(MISO, OUTPUT);
-  SPI.begin();
-}
-
-////////////////////////////////////////
-// module: writeSPI
-//
-// desc: Send data over SPI.
-//
-// inputs: data - data to write
-//
-// outputs: none
-//
-// return: none
-/////////////////////////////////////////
-void writeSPI(uint8_t data)
-{
-  // Writing to SPDR (data register) initiates
-  // data transfer from arduino to pi.
-  SPDR = data;
 }

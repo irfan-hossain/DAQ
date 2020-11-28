@@ -12,25 +12,25 @@
 
 #include "fram.h"
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module: TIMER1TIMER1_COMPB_vect
 //
-// desc: Interrupt triggered when Timer1
-// reaches a set value. This interrupt then
-// the ADC_vect interrupt for sampling.
-///////////////////////////////////////////
+// desc: Interrupt triggered when Timer1 reaches a set 
+// value. This interrupt then the ADC_vect interrupt 
+// for sampling.
+/////////////////////////////////////////////////////////
 ISR(TIMER1_COMPB_vect)
 {
   // Do nothing.
 }
 
-/////////////////////////////////////////
+/////////////////////////////////////////////////////////
 // module:ADC_vect
 //
-// desc: Triggered when TIMER1_COMPB_vect
-// is triggered. This starts the ADC the
-// the ADC result is grabbed from here.
-/////////////////////////////////////////
+// desc: Triggered when TIMER1_COMPB_vect is triggered. 
+// This starts the ADC the the ADC result is grabbed 
+// from here.
+/////////////////////////////////////////////////////////
 ISR(ADC_vect)
 {
   // Read 8-bit conversion result from ADCH.
