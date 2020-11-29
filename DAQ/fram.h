@@ -15,7 +15,5 @@ void txBuffer();
 void refreshBuffers();
 void beginFRAM();
 void bufferSwitching();
-void beginSPI();
-void writeSPI(uint8_t data);
 
 #endif

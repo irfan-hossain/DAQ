@@ -12,14 +12,15 @@
 #include "oledDisplay.h"
 #include "Adafruit_FRAM_I2C.h"
 
-// Takes second half of FRAM chip
+// Buffer 1: Takes second half of FRAM chip
 static const uint16_t BUFFER1_END    = 0x8000;
 static const uint16_t BUFFER1_START  = 0x4000;
 
-// Takes first half of FRAM chip
+// Buffer 2: Takes first half of FRAM chip
 static const uint16_t BUFFER0_END    = 0x4000;
 static const uint16_t BUFFER0_START  = 0x0000;
 
+// Current read/write addresses
 static uint16_t rxAddress;
 static uint16_t txAddress;
 

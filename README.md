@@ -1,22 +1,25 @@
 # DAQ: Data Acquisition System
-This project uses a Raspberry Pi and Arduino Uno to create a high speed data acquisition system. The project is based on the OpenLabTools guide provided by the Univeristy of Cambridge, provided [here](http://openlabtools.eng.cam.ac.uk/Resources/Datalog/RPi_Arduino/). There are a few modifications from the original guide and implementation differences.   
+DAQ uses an Arduino Uno to create a high speed data acquisition system. The project is based on the OpenLabTools guide provided by the Univeristy of Cambridge, provided [here](http://openlabtools.eng.cam.ac.uk/Resources/Datalog/RPi_Arduino/). There are a few modifications from the original guide and implementation differences. 
+
+The purpose of this project was to learn and experiment with Arduino registers, work first hand with SPI and I2C devices, and create an ambient acquisition system that displays data on an OLED display. The system uses an FRAM chip as a double buffer system (the chip is split in half to have rx and tx buffers at any given moment). The FRAM and OLED components are both I2C and use the shared I2C bus.    
+
+A possible application is using the data DAQ as a passive sensor display, to show humidity, temperature, light, or any analog sensor value. The project can be expanded upon to stream the data to another device, or visualize the sensor values with a plot on the OLED.
 
 An immensely helpful reference is the Atmel ATmega328/P datasheet, found [here](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf).
 
 # Hardware
+![Fritzing Schematic of Components](images/Schematic.png)
    * Arduino Uno
    * Light Sensor (or any sensor with analog output)
    * USB Serial Cable (for Uno)
-   * Raspberry Pi 2 (or above)
-   * Adafruit T-Cobbler Plus (Optional)
-   * Logic Level Converter
    * OLED 128x64 I2C display.
+   * Adafruit I2C FRAM
 
 # Specifications
 The goal for this project is to:
-- Sample at 8 KHz KHz.
-  - For a presclaer of 2, the top register should be 499.
+- Sample at a raw rate of 16 KHz. (For a presclaer of 2, the top register should be 1249).
 - Use Timer1 Compare Match B (TOP register is ICR1) to trigger a timer interrupt.
+- Implement a double buffer using the FRAM chip. As data is being written to one half of the chip, data will be read and displayed to the OLED from the second half of the chip.
 - Use analog input A0.
 - Set the reference voltage to 3.3 V.
 - Use an ADC prescale of 8 to achieve fast ADC conversion speeds (2 MHz).
@@ -31,7 +34,7 @@ The code guide section is an explanation of some of the firmware choices for thi
 |REFS1|REFS0|ADLAR|--|MUX3|MUX2|MUX1|MUX0|
 |0|0|1|--|0|0|0|0|
 
-**[7:6]** Sets the reference voltage. This configuration sets the reference voltage to the AREF pin. For now the 5V output pin is connected to AREF.
+**[7:6]** Sets the reference voltage. This configuration sets the reference voltage to the AREF pin. For now the 3.3V output pin is connected to AREF.
 
 **[ 5 ]** Left shifts the 10 bit conversion result so the ADCH register contains an 8-bit result from the ADC. Example:
 * ADLAR = 0, ADCH = ---- --11, ADCL = 1011 0101
@@ -97,4 +100,4 @@ The code guide section is an explanation of some of the firmware choices for thi
 
 ### ICR1
 
-ICR1 = 499
+ICR1 = 1249
